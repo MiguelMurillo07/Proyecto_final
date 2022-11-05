@@ -3,18 +3,18 @@ import numpy as np
 import os
 import io
 
-#boton ingresar 
+#Boton ingresar 
 #funcion para elegir usuario o admin
 #si escoge admin ingresa credenciales 
 #si son credenciales correctas despliega menu de operaciones 
 #si escoge agregar usuarios 
 print("Las opciones para administrador son: ")
-print("1. para agregar ")
-print("2. para modificar ")
-print("3. para borrar ")
-print("4. para mostrar ")
+print("1. Para Agregar ")
+print("2. Para Modificar ")
+print("3. Para Borrar ")
+print("4. Para Mostrar ")
 
-s=int(input("escoja la accion a relizar: "))
+s=int(input("Por Favor escoja la acción que desea realizar: "))
 
 m=2
 n=3
