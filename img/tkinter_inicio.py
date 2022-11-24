@@ -10,9 +10,9 @@ principal.geometry("1000x500")
 
 principal.resizable(False,False)
 
-principal.config(bg= "purple")
+principal.config(bg= "lime green")
 
-target = Label(principal, text="Hola, Te damos la bienvenida al Parqueadero Público de la UIS.")
+target = Label(principal, text="Hola, Te damos la bienvenida al Parqueadero Público de la UIS.", bg="white")
 target.place(x=330, y=10)
 
 target2 = Label(principal, text="Define que tipo de usuario eres: ")
@@ -35,17 +35,19 @@ boton2.place(x=600 , y=140)
 def actualizar_hora():
     hora = time.strftime("%H:%M:%S")
     variable_control.set(hora)
-    root.after(1000, actualizar_hora)
-
-root = Tk()
-root.resizable(False, False)
+    principal.after(1000, actualizar_hora)
 
 variable_control = StringVar()
 
-reloj = Label(textvariable= variable_control, fg="red", font=("Arial", 18), padx=20, pady=20, bitmap="hourglass", compound="left")
-reloj = Label(textvariable= variable_control, fg="red", font=("Arial", 18), padx=20, pady=20)
-reloj.pack()
+reloj = Label(textvariable= variable_control, bg="lime green", fg="white", font=("Arial", 15), padx=20, pady=20, bitmap="hourglass", compound="left")
 
+reloj.pack()
+reloj.place(x=840, y=1)
 actualizar_hora()
-root.mainloop()
+
+# Logo app
+logo = PhotoImage(file= "logo.jpeg")
+lb_logo = Label(principal, image=logo)
+lb_logo.place(x=700, y=300)
+
 principal.mainloop()
