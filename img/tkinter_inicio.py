@@ -14,6 +14,10 @@ principal.geometry("1000x500")
 principal.resizable(False,False)
 
 principal.config(bg= "lime green")
+#principal.config(background= "#1f2f85")
+#principal.iconbitmap(file="C:\\Users\\7317\\Desktop\\Proyecto_final\\img\\icono.ico")
+img = PhotoImage(file="C:\\Users\\57317\\Desktop\\Proyecto_final\img\\icono.jpg")
+principal.iconphoto(False, img)
 
 target = Label(principal, text="Hola, Te damos la bienvenida al Parqueadero Público de la UIS.")
 target.config(fg="black", bg="lime green", font=("Bahnschrift SemiBold SemiConden", 15))
@@ -76,9 +80,10 @@ reloj.place(x=900, y=35)
 actualizar_hora()
 
 # Logo app
-#logo = PhotoImage(file= "logo.jpeg")
-#lb_logo = Label(principal, image=logo)
-#lb_logo.place(x=700, y=300)
+logo = PhotoImage(file= "C:\\Users\\57317\\Desktop\\Proyecto_final\\img\\logo.png")
+lb_logo = Label(principal, image=logo)
+lb_logo.place(x=700, y=300)
+lb_logo.pack()
 
 #Widget fecha
 def actualizar_fecha():
