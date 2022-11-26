@@ -5,18 +5,17 @@ import tkinter as tk
 from datetime import datetime
 import sys
 
-
 # Ventana Usuario 
 def ventana_estudiantes():
    global ventana_estudiantes
    ventana_estudiantes=Toplevel(principal)
    ventana_estudiantes.geometry("1000x500")
-   ventana_estudiantes.title("ventana del Usuario")
+   ventana_estudiantes.title("Ventana del Usuario")
    ventana_estudiantes.config(bg="lime green")
    ventana_estudiantes.iconbitmap("icono2.ico")
 
-   Button(ventana_estudiantes, text="Regresar", width=20, command=volver_ventana).place(relx=0.5, rely=0.5)
-   Button(ventana_estudiantes, text="Haz click aquí para generar tu código QR.", command=generar_codigo).place(x=500, y=250)       
+   Button(ventana_estudiantes, text="Regresar", width=20, command=volver_ventana).place(x=60, y=60)
+   Button(ventana_estudiantes, text="Haz click aquí para generar tu código QR.", width=30, command=ventana_loginuser).place(x=500, y=250)       
     
    ventana_estudiantes.mainloop()
 
@@ -32,6 +31,56 @@ def ventana_administrador():
    Button(ventana_administrador, text="Regresar", width=20, command=volver_ventana2).place(x=400, y=250)
    
    ventana_administrador.mainloop()
+
+def ventana_loginuser():
+    global ventana_loginuser
+    ventana_loginuser=Toplevel(principal)
+    ventana_loginuser.title("Login")
+    ventana_loginuser.geometry("300x150")
+    #ventana_loginuser.config(bg="dark gray")
+    ventana_loginuser.iconbitmap("icono4.ico")
+    ventana_loginuser.resizable(False, False)
+
+    
+    def aceptar():
+        usuario = usuario_entry.get()
+        if usuario:
+            etiqueta.configure(text="Usuario: " + usuario)
+        else:
+            etiqueta.configure(text="Usuario no introducido")
+        ventana_acceso.destroy()
+    
+def cancelar():
+    usuario_entry.delete(0, "end")
+    contraseña_entry.delete(0, "end")
+
+def acceder():
+    global ventana_acceso, usuario_entry, contraseña_entry
+    
+    ventana_acceso = Toplevel()
+    ventana_acceso.title("Login")
+    ventana_acceso.resizable(False, False)
+
+    usuario_label = Label(ventana_acceso, text="USUARIO:")
+    usuario_entry = Entry(ventana_acceso, bd=5, highlightcolor="red", highlightthickness=2)
+    contraseña_label = Label(ventana_acceso, text="CONTRASEÑA:")
+    contraseña_entry = Entry(ventana_acceso, bd=5, show='*', highlightcolor="red", highlightthickness=2)
+    boton_aceptar = Button(ventana_acceso, text="ACEPTAR", command=aceptar)
+    boton_cancelar = Button(ventana_acceso, text="CANCELAR", command=cancelar)
+
+    usuario_label.grid(row=0, column=0, sticky= "W", padx=10, pady=10)
+    usuario_entry.grid(row=0, column=1, padx=10)
+    contraseña_label.grid(row=1, column=0, sticky= "W", padx=10, pady=10)
+    contraseña_entry.grid(row=1, column=1, padx=10)
+    boton_aceptar.grid(row=2, column=0, padx=10, pady=10, sticky= "W")
+    boton_cancelar.grid(row=2, column=1, padx=10, pady=10, sticky= "E")
+
+
+boton = Button(text="ACCEDER",command=acceder)
+etiqueta = Label(text="Usuario no introducido")
+boton.place(relx=0.5, rely=0.5, anchor="center")
+etiqueta.pack(side="bottom", pady=5)
+    
 
 # Volver a la ventana principal desde Usuario 
 def volver_ventana():
@@ -133,7 +182,7 @@ actualizar_hora()
 # Logo app
 logo = PhotoImage(file= "logo.png")
 lb_logo = Label(principal, image=logo)
-lb_logo.place(x=18, y=60)
+lb_logo.place(x=18, y=50)
 
 #Widget fecha
 
@@ -160,51 +209,14 @@ frame_borde2 = Frame(principal)
 frame_borde2.config(bg="green4", width=1000, height=20)
 frame_borde2.place(x=0, y=480)
 
+frame_tapa = Frame(principal)
+frame_tapa.config(bg="lime green", width=200, height=40)
+frame_tapa.place(x=18, y=50)
 
+frame_tapa2 = Frame(principal)
+frame_tapa2.config(bg="lime green", width=200, height=40)
+frame_tapa2.place(x=18, y=165)
 
 # Inicio login Usuario
-
-def aceptar():
-    usuario = usuario_entry.get()
-    if usuario:
-        etiqueta.configure(text="Usuario: " + usuario)
-    else:
-        etiqueta.configure(text="Usuario no introducido")
-    ventana_acceso.destroy()
-    
-def cancelar():
-    usuario_entry.delete(0, "end")
-    contraseña_entry.delete(0, "end")
-
-def acceder():
-    global ventana_acceso, usuario_entry, contraseña_entry
-    
-    ventana_acceso = Toplevel()
-    ventana_acceso.title("Login")
-    ventana_acceso.resizable(False, False)
-
-    usuario_label = Label(ventana_acceso, text="USUARIO:")
-    usuario_entry = Entry(ventana_acceso, bd=5, highlightcolor="red", highlightthickness=2)
-    contraseña_label = Label(ventana_acceso, text="CONTRASEÑA:")
-    contraseña_entry = Entry(ventana_acceso, bd=5, show='*', highlightcolor="red", highlightthickness=2)
-    boton_aceptar = Button(ventana_acceso, text="ACEPTAR", command=aceptar)
-    boton_cancelar = Button(ventana_acceso, text="CANCELAR", command=cancelar)
-
-    usuario_label.grid(row=0, column=0, sticky= "W", padx=10, pady=10)
-    usuario_entry.grid(row=0, column=1, padx=10)
-    contraseña_label.grid(row=1, column=0, sticky= "W", padx=10, pady=10)
-    contraseña_entry.grid(row=1, column=1, padx=10)
-    boton_aceptar.grid(row=2, column=0, padx=10, pady=10, sticky= "W")
-    boton_cancelar.grid(row=2, column=1, padx=10, pady=10, sticky= "E")
-
-root = Tk()
-root.title("Ventana de acceso")
-root.geometry("300x150")
-root.minsize(300, 150)
-boton = Button(text="ACCEDER",command=acceder)
-etiqueta = Label(text="Usuario no introducido")
-boton.place(relx=0.5, rely=0.5, anchor="center")
-etiqueta.pack(side="bottom", pady=5)
-
 
 principal.mainloop()
